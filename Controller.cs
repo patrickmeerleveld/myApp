@@ -1,15 +1,10 @@
 using System;
-
 namespace myApp
 {
     public class Controller{
-        public Controller(){
-
-        }
         public EInput GetInput(){
             ConsoleKeyInfo info = Console.ReadKey(true);
             EInput result = EInput.Unassigned;
-                        
             switch(info.Key){
                 case ConsoleKey.W:
                     result = EInput.Up;
@@ -34,10 +29,8 @@ namespace myApp
                 break;
                 
             }
-            return result;
-            
-        }
-    
+            return result;            
+        }    
     }
     public enum EInput {Unassigned, Up, Down, Left, Right, Fire1, Fire2, ESC};
 }

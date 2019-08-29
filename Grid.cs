@@ -1,22 +1,16 @@
 using System;
 using System.Collections.Generic;
 namespace myApp{
-
     public class Grid
     {
         private char [,] grid;
-       
-      //  private ArrayList grids = new ArrayList();
-    
         public void add(char [,] grid ){
-            this.grid = grid; 
-        //    grids.Add(grid);
-           
+            this.grid = grid;            
         }
         public char [,] Get2DArray(){
             return grid;
         }
-         private Position pos = new Position(0,0);
+        private Position pos = new Position(0,0);
         public List<Position> Find(char toFind){
         
             List<Position> positions = new List<Position>();
@@ -36,7 +30,5 @@ namespace myApp{
         public char GetFrom(Position p){
             return this.grid[p.y,p.x];
         }
-
-
     }
 }

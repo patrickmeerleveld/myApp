@@ -11,6 +11,7 @@ namespace myApp
         }
         public void PaintGrid()
         {
+
             for(int y = 0; y < grid.Get2DArray().GetLength(0); y++)
             {
                 for(int x = 0; x < grid.Get2DArray().GetLength(1); x++)

@@ -18,6 +18,7 @@ namespace myApp{
                 g.Replace(dest,'*');
                 Console.Clear();
                 gp.PaintGrid();    
+                
                 Thread.Sleep(500);
                 g.Replace(dest,'X');
             }else{
