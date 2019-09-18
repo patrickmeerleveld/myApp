@@ -15,29 +15,21 @@ namespace myApp
             g.add(new char [,]
             {
                 {'#','#','#','#','#','#','#','#','#','#','#','#'},
-                {'#',' ','#','X',' ','#',' ',' ',' ',' ',' ','#'},
-                {'#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#'},
-                {'#','P','#',' ',' ','#',' ',' ','X',' ',' ','#'},
+                {'#',' ','#','X',' ','#',' ',' ',' ',' ',' ','@'},
+                {'#',' ',' ',' ',' ','#',' ',' ',' ',' ',' ','#'},
+                {'#','P','#','#',' ','#',' ',' ','X',' ',' ','#'},
+                {'#',' ','#','#',' ','#',' ',' ',' ',' ',' ','#'},
+                {'#',' ','#','#',' ','#',' ',' ',' ',' ',' ','#'},
+                {'#',' ','#','#',' ','#',' ',' ',' ',' ',' ','#'},
                 {'#',' ','#',' ',' ','#',' ',' ',' ',' ',' ','#'},
                 {'#',' ','#',' ',' ','#',' ',' ',' ',' ',' ','#'},
-                {'#',' ','#',' ','X','#',' ',' ',' ',' ',' ','#'},
-                {'#',' ','#',' ',' ','#',' ',' ',' ',' ',' ','#'},
-                {'#',' ','#',' ',' ','#',' ',' ',' ',' ',' ','#'},
-                {'#',' ','#',' ',' ','#',' ',' ',' ',' ',' ','#'},
+                {'#',' ','#',' ',' ',' ',' ',' ',' ',' ',' ','#'},
                 {'#','#','#','#','#','#','#','#','#','#','#','#'}                
-            });
-    
-            
+            });           
 
 
             GridPainter gp = new GridPainter(g);
-            gp.PaintGrid();
-
-
-
-            
-            
-                     
+            gp.PaintGrid();                    
          
             //setup player
             Player player = new Player();
@@ -75,7 +67,31 @@ namespace myApp
                     runState = false;
                     break;  
                 }     
-                player.TryMove(g,dest,gp);         
+                char destChar = player.TryMove(g,dest);    
+                
+                if(destChar == '#'){                            
+                    Console.Beep(1200,500);                                      
+                }else if(destChar =='X'){               
+                    Console.Beep(900,100);
+                    g.Replace(dest,'*');
+                    Console.Clear();
+                    gp.PaintGrid();    
+                    Thread.Sleep(500);
+                    g.Replace(dest,'X');
+                }else if(destChar == '@'){
+                    Console.Clear();
+                    Console.WriteLine("You Escaped!");
+                    runState = false;
+                    break;
+                }
+                else
+                {
+                    g.Replace(player.GetPosition(),' ');                        
+                    player.UpdatePosition(dest);
+                    g.Replace(dest,'P');      
+                }
+                Console.Clear();
+                gp.PaintGrid();     
                 
                      
             }     
