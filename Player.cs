@@ -3,7 +3,7 @@ using System.Threading;
 namespace myApp{
     class Player{
         private Position position;
-        private int life = 10;
+        private int life = 200;
         
         public int GetLife(){
             return life;

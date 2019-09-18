@@ -15,10 +15,10 @@ namespace myApp
             g.add(new char [,]
             {
                 {'#','#','#','#','#','#','#','#','#','#','#','#'},
-                {'#',' ','#','X',' ','#',' ',' ',' ',' ',' ','@'},
-                {'#',' ',' ',' ',' ','#',' ',' ',' ',' ',' ','#'},
+                {'#',' ','#','X',' ','#',' ',' ',' ',' ','X','@'},
+                {'#',' ','X',' ',' ','#',' ',' ',' ',' ',' ','#'},
                 {'#','P','#','#',' ','#',' ',' ','X',' ',' ','#'},
-                {'#',' ','#','#',' ','#',' ',' ',' ',' ',' ','#'},
+                {'#',' ','#','#','X','#',' ',' ',' ',' ',' ','#'},
                 {'#',' ','#','#',' ','#',' ',' ',' ',' ',' ','#'},
                 {'#',' ','#','#',' ','#',' ',' ',' ',' ',' ','#'},
                 {'#',' ','#',' ',' ','#',' ',' ',' ',' ',' ','#'},
@@ -42,6 +42,7 @@ namespace myApp
             for(int i = 0; i < enemyPositions.Count;i++){
                 enemies.Add(new Enemy());
                 enemies[i].UpdatePosition(enemyPositions[i]);
+                enemies[i].SetLife(10);
             }
             //setup the controller
             Controller c = new Controller();
@@ -78,6 +79,36 @@ namespace myApp
                     gp.PaintGrid();    
                     Thread.Sleep(500);
                     g.Replace(dest,'X');
+                    Enemy currentEnemy = null;
+                    foreach(Enemy e in enemies){
+                        if(e.GetPosition().x == dest.x && e.GetPosition().y == dest.y){
+                            
+                            currentEnemy = e;
+                            break;
+                        }
+                    }
+                    if(currentEnemy!=null){
+                        Random r = new Random();   
+
+                        
+                        
+                        currentEnemy.SetLife(currentEnemy.GetLife()-r.Next(0,5));
+                        player.SetLife(player.GetLife()-r.Next(0,5));
+                        if(currentEnemy.GetLife() <= 0){
+                            enemies.Remove(currentEnemy);
+                            g.Replace(dest,' ');
+                        }
+                        if(player.GetLife() <= 0){
+                            Console.Clear();
+                            Console.WriteLine("You Died!");
+                            runState = false;
+                            break;
+
+                        }
+                    }
+
+
+
                 }else if(destChar == '@'){
                     Console.Clear();
                     Console.WriteLine("You Escaped!");
