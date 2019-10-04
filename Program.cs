@@ -29,6 +29,8 @@ namespace myApp
             GridPainter gp = new GridPainter(g);
             gp.PaintGrid();                    
          
+            Console.WriteLine("Patrick heeft dit aangepast voor bronze opdracht xD");
+
             //setup player
             Player player = new Player();
             Position playerPos = g.Find('P')[0];        
